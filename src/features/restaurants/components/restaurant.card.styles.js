@@ -5,6 +5,7 @@ import { Text } from "react-native-paper";
 
 export const RestaurantCard = styled(Card)`
   background-color: ${theme.colors.bg.primary};
+  margin-bottom: 20px;
 `;
 
 export const RestaurantCardCover = styled(Card.Cover)`
