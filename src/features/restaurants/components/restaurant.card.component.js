@@ -14,7 +14,7 @@ import {
   Address,
 } from "./restaurant.card.styles";
 
-export const RestaurantInfo = ({ restaurant = {} }) => {
+export const RestaurantInfo = ({ restaurant = { restaurant } }) => {
   const {
     name = "Jack Browns",
     icon,

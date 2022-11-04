@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { FlatList, SafeAreaView, View, Text } from "react-native";
-import { Searchbar } from "react-native-paper";
+import { Searchbar, ActivityIndicator } from "react-native-paper";
 import { StatusBar } from "expo-status-bar";
 import { MainSafeAreaView } from "../components/utils/safearea.component.js";
 import styled from "styled-components";
@@ -15,15 +15,21 @@ const SearchBarContainer = styled(Searchbar)`
 `;
 
 export const RestaurantScreen = () => {
-  const restaurantContext = useContext(RestaurantContext);
-  console.log(restaurantContext);
+  const { isLoading, restaurants, error } = useContext(RestaurantContext);
   return (
     <>
       <MainSafeAreaView>
+        {isLoading && (
+          <View style={{ position: "absolute", top: "50%", left: "50%" }}>
+            <ActivityIndicator animating={true} size={50} style={{marginLeft: -25}} />
+          </View>
+        )}
         <SearchBarContainer placeholder="ASS" />
         <FlatList
-          data={restaurantContext.restaurants}
-          renderItem={() => <RestaurantInfo />}
+          data={restaurants}
+          renderItem={({ item }) => {
+            return <RestaurantInfo restaurant={item} />;
+          }}
           keyExtractor={(item) => item.name}
           contentContainerStyle={{ padding: 16 }}
         />
